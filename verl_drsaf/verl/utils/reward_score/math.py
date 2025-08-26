@@ -91,38 +91,6 @@ def check_think_tags(s: str) -> bool:
     
     # 检查是否都恰好出现一次
     return start_count == 1 and end_count == 1
-def analyze_verification_content(text):
-    reward = 0
-    # 提取</think>之后的所有内容
-    post_think = re.split(r'</think>', text, flags=re.IGNORECASE)[-1]
-    
-    # 尝试提取<Verification>标签内容
-    verification_match = re.search(r'<Verification>(.*?)</Verification>', 
-                                 post_think, 
-                                 flags=re.DOTALL | re.IGNORECASE)
-    
-    if verification_match:
-        reward+=1
-        verification_content = verification_match.group(1).strip()
-        verification_ratio = len(verification_content) / len(text)
-        
-        # print(f"提取到的验证内容:\n{verification_content}\n")
-        # print(f"验证内容长度: {len(verification_content)}")
-        # print(f"总文本长度: {len(text)}")
-        # print(f"验证内容占比: {verification_ratio:.2%}")
-        
-        # 判断是否达到1/4长度要求
-        if verification_ratio >= 0.25:
-            reward+=1
-            # print("✅ 验证内容达到总长度的1/4")
-            # return True
-        # else:
-        #     print("⚠️ 验证内容未达到总长度的1/4")
-            # return False
-    # else:
-        # print("未找到<Verification>标签内容")
-        # return False
-    return reward
 
 
 # from . import math_verify_v2
@@ -214,27 +182,15 @@ def compute_score(solution_str, ground_truth, extra_info, step=0,datasource = No
     except Exception:
         return retval,None
 def compare_strings_TFYN(str1, str2):
-    """
-    检查两个字符串是否同为 "Yes/True" 类或 "No/False" 类。
-    
-    参数:
-        str1 (str): 第一个字符串。
-        str2 (str): 第二个字符串。
-        
-    返回:
-        bool: 如果两者属于同一类（Yes/True 或 No/False），返回 True；否则返回 False。
-    """
-    # 预处理：去除空格、转小写
+
     str1 = str(str1).strip().lower()
     str2 = str(str2).strip().lower()
 
-    # 定义类别映射（支持普通文本和 LaTeX 格式）
     categories = {
         "yes": ["yes", "true", r"\text{yes}", r"\text{true}"],
         "no": ["no", "false", r"\text{no}", r"\text{false}"]
     }
 
-    # 判断是否同属一类
     if (str1 in categories["yes"] and str2 in categories["yes"]) or \
        (str1 in categories["no"] and str2 in categories["no"]):
         return True
