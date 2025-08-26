@@ -194,17 +194,17 @@ def compute_score(solution_str, ground_truth, extra_info, step=0,datasource = No
                 try:
                     ret_score, _ = verify_func([ground_truth_boxed], [solution_str])
                     if ret_score>=0.99:
-                        think_score2 = int(check_think___tags(solution_str)) * 0.025
-                        return 1+think_score2,None
+                        # think_score2 = int(check_think___tags(solution_str)) * 0.025
+                        return 1,None
                 except Exception:
                     pass
                 except TimeoutException:
                     pass
                 if is_equiv(answer.replace("[","").replace("]","").replace(" ","").replace("(","").replace(")","").replace("\\text","").replace("%",""), ground_truth.replace(" ","").replace("(","").replace(")","").replace("\\text","").replace(" ","").replace("%","")):
-                    think_score2 = int(check_think___tags(solution_str))*0.025
-                    return 1+think_score2,None
-                think_score = int(check_think___tags(solution_str)) * 0.025
-                return think_score,None
+                    # think_score2 = int(check_think___tags(solution_str))*0.025
+                    return 1,None
+                # think_score = int(check_think___tags(solution_str)) * 0.025
+                return 0,None
     except Exception as e:
         print(e)
     info ={}

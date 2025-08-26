@@ -101,7 +101,7 @@ def parse_llm_output(response_str, gt=1, acc_rate=0, step=0, len_rate=0, resleng
     response_str_v0 = response_str
     print(f"acc_rate:{acc_rate}")
     cfrb_b = 0.95
-    pfrb_b_ext = 0.9
+    pfrb_b_ext = 0.5
     if acc_rate >= cfrb_b:
         preference = "cfrb"
         decay_rate = 0.1
@@ -119,9 +119,9 @@ def parse_llm_output(response_str, gt=1, acc_rate=0, step=0, len_rate=0, resleng
     else:
         gt=0
     if decay_rate>0:
-        final_len_reward = decay_rate*int(reslen <= reslength_medium) * 60 * gt
+        final_len_reward = decay_rate*int(reslen <= reslength_medium) * 50 * gt
     else:
-        final_len_reward = - decay_rate * int(reslen >= reslength_medium) * 60 *(1-gt)
+        final_len_reward = - decay_rate * int(reslen >= reslength_medium) * 50 *(1-gt)
     # 4. Initialize result structure and parse response
     result = {
         "planning_boundary": None,
@@ -135,23 +135,17 @@ def parse_llm_output(response_str, gt=1, acc_rate=0, step=0, len_rate=0, resleng
         "post_boundary_length": 0,
         "boundary_too_long": False
     }
-    
-    processed_response = response_str.replace("[response]", "", 1)  # 只替换第一个出现的 [response]
-    processed_response = processed_response.lstrip("\n")  # 只移除开头的换行符（如果有）
-    response_str = f"\n<think>\nI should first analyze the difficulty of the question. After careful analysis, I believe that the difficulty of the problem is as follows:\nDifficulty: {processed_response}"
+
     reward = 0
     result["difficulty"] = extract_difficulty(response_str_v0)
     if result["difficulty"] == preference:
-        reward += 20
+        reward += 2
 
     if result["difficulty"] == "cfrb":
-        reward += 12
-        if gt<0.5:
-            reward-=12
+        reward += 1
     elif result["difficulty"] == "pfrb":
-        reward+=12
+        reward += 1
 
-    
     reward += final_len_reward
     reward*=0.01
     print(f"format reward2:{reward}")

@@ -166,11 +166,24 @@ class RLHFDataset(Dataset):
         self.dataframe: datasets.Dataset = datasets.concatenate_datasets(dataframes)
         
         def extract_and_store_numbers(row):
+            if not isinstance(row['extra_info'], dict):
+                row['extra_info'] = {}
+            row['extra_info'].setdefault('flag_add', '0')
+            row['extra_info'].setdefault('version', '1')
+            answer = str(row['extra_info'].get('answer', ''))
+            numbers = re.findall(r'=\s*([-+]?\d*\.?\d+|\\frac\{.*?\}|\sqrt\{.*?\})', answer)
+            row['extra_info']['numbers_after_dots'] = [str(num).replace(" ","") for num in numbers]
+            row['extra_info']['version'] = '1'
+            row['extra_info']['flag_add'] = '0'
+            row['extra_info']['sub_ans'] = ''
+            
 
-            row[self.prompt_key][0]['content'] = remove_thinking_part(row[self.prompt_key][0]['content'])
-            row[self.prompt_key][0]['content'] = Prompt_0701+ row[self.prompt_key][0]['content'] +"\n</question>\n"
+            if True:
+                row[self.prompt_key][0]['content'] = remove_thinking_part(row[self.prompt_key][0]['content'])
+                row[self.prompt_key][0]['content'] = Prompt_0701+ row[self.prompt_key][0]['content'] +"\n</question>\n"
             return row
 
+        # 使用 datasets.Dataset 的 map 方法替代 apply
         self.dataframe = self.dataframe.map(extract_and_store_numbers)
         
         print(f"dataset len: {len(self.dataframe)}")

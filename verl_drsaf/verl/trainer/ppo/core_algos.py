@@ -293,7 +293,7 @@ def compute_grpo_outcome_advantage(
     id2mean = {}
     id2std = {}
     id2scale = {}
-
+    id2min = {}
     with torch.no_grad():
         bsz = scores.shape[0]
         for i in range(bsz):
@@ -306,21 +306,27 @@ def compute_grpo_outcome_advantage(
             group_scores = torch.tensor(id2score[idx], device=device)
             if torch.all(group_scores > 0.5):
                 len_1 += 1
-            if torch.all(group_scores < 0.4):
+            if torch.all(group_scores < 0.5):
                 len_0 += 1
 
             if len(id2score[idx]) == 1:
                 id2mean[idx] = torch.tensor(0.0, device=device)
+                id2min[idx] = torch.tensor(0.0, device=device)
                 id2std[idx] = torch.tensor(1.0, device=device)
             else:
                 id2mean[idx] = torch.mean(group_scores)
                 id2std[idx] = torch.std(group_scores)
                 mask = group_scores > 0.5
+                id2min[idx] = torch.mean(group_scores)
                 if mask.any():  # If any scores > 0.5 exist
                     if torch.mean(group_scores)>torch.min(group_scores[mask]):
-                        id2mean[idx] = torch.min(group_scores[mask])
+                        id2min[idx] = torch.min(group_scores[mask])
+                
         for i in range(bsz):
-            scores[i] = (scores[i] - id2mean[index[i]]) / (id2std[index[i]] + epsilon)
+            if scores[i]>0.5:
+                scores[i] = (scores[i] - id2min[index[i]]) / (id2std[index[i]] + epsilon)
+            else:
+                scores[i] = (scores[i] - id2mean[index[i]]) / (id2std[index[i]] + epsilon)
         print(f"\n*****\ngrpo_v2\ntotal:{len_total}\n0 num:{len_0}\n1 num:{len_1}")
         scores = scores.unsqueeze(-1).expand(-1, response_length) * response_mask
     return scores, scores
