@@ -6,4 +6,8 @@ Recent advancements in large language models (LLMs) have greatly improved their 
 
 ---
 
-*We provide a training script for Qwen2-7B:* `test_qwen2_7b.sh`*. You will need to fill in your training and test datasets, as well as the local path to the base model for training. We will release a more stable training script and a script for Qwen3 within three days.*
+We provide a training script for Qwen2-7B-Distill:* `qwen2_7b.sh`*. You will need to fill in your training and test datasets, as well as the local path to the base model for training. 
+
+---
+
+You can adjust the `cfrb_b`parameter and the `pfrb_b_ext`parameter in `verl_drsaf\verl\utils\reward_score\init.py`. Decreasing both parameters will result in a higher degree of compression, while increasing both will better preserve performance.

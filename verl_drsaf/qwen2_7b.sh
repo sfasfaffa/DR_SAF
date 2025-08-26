@@ -59,6 +59,6 @@ python3   -m verl.trainer.main_ppo \
     trainer.n_gpus_per_node=8 \
     trainer.nnodes=1 \
     trainer.save_freq=5 \
-    trainer.test_freq=15 \
+    trainer.test_freq=5 \
     trainer.val_only=False \
     trainer.total_epochs=30 $@
