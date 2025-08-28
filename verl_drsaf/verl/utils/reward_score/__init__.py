@@ -101,7 +101,7 @@ def parse_llm_output(response_str, gt=1, acc_rate=0, step=0, len_rate=0, resleng
     response_str_v0 = response_str
     print(f"acc_rate:{acc_rate}")
     cfrb_b = 0.95
-    pfrb_b_ext = 0.5
+    pfrb_b_ext = 0.3
     if acc_rate >= cfrb_b:
         preference = "cfrb"
         decay_rate = 0.1
