@@ -6,7 +6,7 @@ Recent advancements in large language models (LLMs) have greatly improved their 
 
 ---
 
-We provide a training script for Qwen2-7B-Distill:* `qwen2_7b.sh`*. You will need to fill in your training and test datasets, as well as the local path to the base model for training. 
+We provide a training script for Qwen2 and Qwen3:* `qwen2_7b.sh`*,* `qwen3_8b.sh`*. You will need to fill in your training and test datasets, as well as the local path to the base model for training. 
 
 ---
 
