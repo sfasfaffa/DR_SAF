@@ -6,7 +6,7 @@ Recent advancements in large language models (LLMs) have greatly improved their 
 
 ---
 
-We provide a training script for Qwen2 and Qwen3:* `verl_drsaf\qwen2_7b.sh`*,* `verl_drsaf\qwen3_8b.sh`*. You will need to fill in your training and test datasets, as well as the local path to the base model for training. You can find our prompt at `verl_drsaf\verl\utils\dataset\rl_dataset.py`.
+We provide a training script for Qwen2 and Qwen3: `verl_drsaf\qwen2_7b.sh`, `verl_drsaf\qwen3_8b.sh`. You will need to fill in your training and test datasets, as well as the local path to the base model for training. You can find our prompt at `verl_drsaf\verl\utils\dataset\rl_dataset.py`.
 
 ---
 
