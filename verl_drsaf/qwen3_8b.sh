@@ -28,7 +28,7 @@ python3   -m verl.trainer.main_ppo \
     data.max_response_length=22000 \
     data.filter_overlong_prompts=True \
     data.truncation='error' \
-    actor_rollout_ref.actor.optim.lr=5e-7 \
+    actor_rollout_ref.actor.optim.lr=4e-7 \
     actor_rollout_ref.model.path=/path-to-DeepSeek-R1-Distill-Qwen3-8B \
     actor_rollout_ref.model.use_remove_padding=True \
     actor_rollout_ref.actor.ppo_mini_batch_size=8 \
@@ -54,7 +54,7 @@ python3   -m verl.trainer.main_ppo \
     trainer.critic_warmup=0 \
     trainer.logger=['console','wandb'] \
     trainer.project_name='verl_grpo_math' \
-    trainer.experiment_name='qwen2_test' \
+    trainer.experiment_name='qwen3_test' \
     trainer.val_before_train=False \
     data.val_batch_size=512 \
     trainer.n_gpus_per_node=8 \

@@ -6,8 +6,21 @@ Recent advancements in large language models (LLMs) have greatly improved their 
 
 ---
 
-We provide a training script for Qwen2 and Qwen3:* `qwen2_7b.sh`*,* `qwen3_8b.sh`*. You will need to fill in your training and test datasets, as well as the local path to the base model for training. 
+We provide a training script for Qwen2 and Qwen3:* `verl_drsaf\qwen2_7b.sh`*,* `verl_drsaf\qwen3_8b.sh`*. You will need to fill in your training and test datasets, as well as the local path to the base model for training. You can find our prompt at `verl_drsaf\verl\utils\dataset\rl_dataset.py`.
 
 ---
 
 You can adjust the `cfrb_b`parameter and the `pfrb_b_ext`parameter in `verl_drsaf\verl\utils\reward_score\init.py`. Decreasing both parameters will result in a higher degree of compression, while increasing both will better preserve performance.
+
+---
+
+This work is implemented based on **VERL**. You can adapt our code using VERL's installation procedure. We extend our gratitude to the authors for their excellent contributions. If you find our work inspiring or helpful, please cite:
+
+```bibtex
+@article{chen2025aware,
+  title={Aware First, Think Less: Dynamic Boundary Self-Awareness Drives Extreme Reasoning Efficiency in Large Language Models},
+  author={Chen, Qiguang and Peng, Dengyun and Liu, Jinhao and Su, HuiKang and Guan, Jiannan and Qin, Libo and Che, Wanxiang},
+  journal={arXiv preprint arXiv:2508.11582},
+  year={2025}
+}
+```
