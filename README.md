@@ -14,7 +14,7 @@ You can adjust the `cfrb_b`parameter and the `pfrb_b_ext`parameter in `verl_drsa
 
 ---
 
-This work is implemented based on **VERL**. You can adapt our code using VERL's installation procedure. We extend our gratitude to the authors for their excellent contributions. If you find our work inspiring or helpful, please cite:
+This work is implemented based on **VERL**. We extend our gratitude to the authors for their excellent contributions. You can adapt our code using VERL's installation procedure. If you find our work inspiring or helpful, please cite:
 
 ```bibtex
 @article{chen2025aware,
