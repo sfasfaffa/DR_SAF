@@ -10,7 +10,7 @@ We provide training scripts for Qwen2 and Qwen3: `verl_drsaf/qwen2_7b.sh` and `v
 *   https://huggingface.co/LARG/DRSAF-Qwen2.5-7B-distill
 *   https://huggingface.co/LARG/DRSAF-Qwen2.5-7B-distill-extreme
 
-To reproduce the results, please follow the prompt located in `verl_drsaf/verl/utils/dataset/rl_dataset.py`.
+To reproduce the results, please follow the prompt located in `verl_drsaf/verl/utils/dataset/rl_dataset.py`. Removing the mandatory self-capability boundary evaluation before inference will moderately improve accuracy but increase token length.
 
 ---
 
