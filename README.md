@@ -1,4 +1,4 @@
-# Aware First, Think Less: Dynamic Boundary Self-Awareness Drives Extreme Reasoning Efficiency in Large Language Models （AAAI2026）
+# Aware First, Think Less: Dynamic Boundary Self-Awareness Drives Extreme Reasoning Efficiency in Large Language Models (AAAI2026)
 
 ---
 
